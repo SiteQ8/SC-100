@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SC-100 | Microsoft Cybersecurity Architect</title>
+<meta name="description" content="Course companion for SC-100, built from the official skills measured as of 28 July 2026, with every reference link verified.">
+<style>
+:root{
+  --bg:#07090c; --panel:#0d1117; --panel2:#11161d; --raise:#161c25;
+  --rule:#1c232c; --rule-hi:#2a333e;
+  --ink:#e9edf2; --dim:#96a1ad; --faint:#5d6874;
+  --az:#3d9df6; --ok:#3ecf8e; --new:#d98a2b; --warn:#e0685c;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --ar:"SF Arabic","Segoe UI","Noto Naskh Arabic","Geeza Pro",Tahoma,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --lift:inset 0 1px 0 rgba(255,255,255,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{
+  background:radial-gradient(1100px 460px at 50% -10%,rgba(61,157,246,.1),transparent 70%),var(--bg);
+  color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;
+  letter-spacing:-0.005em;font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+html[dir="rtl"] body{font-family:var(--ar);line-height:1.85;letter-spacing:normal}
+a{color:inherit}button{font-family:inherit}
+.w{max-width:1080px;margin:0 auto;padding:0 22px}
+
+.top{border-bottom:1px solid var(--rule);background:rgba(7,9,12,.92);
+     backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
+.top-in{display:flex;align-items:center;gap:13px;padding:12px 0}
+.sig{width:36px;height:36px;flex:none;border-radius:8px;display:grid;place-items:center;
+     background:linear-gradient(150deg,var(--az),#1c62ad);color:#03121f;
+     font-family:var(--mono);font-size:12px;font-weight:700;box-shadow:var(--lift)}
+.nm{flex:1;min-width:0}
+.nm b{display:block;font-size:15px;font-weight:650;line-height:1.25}
+.nm span{display:block;font-size:11.5px;color:var(--faint)}
+.lang{background:transparent;border:1px solid var(--rule-hi);color:var(--dim);
+      padding:6px 12px;border-radius:7px;cursor:pointer;font-size:12.5px;font-weight:600}
+.lang:hover{border-color:var(--az);color:var(--az)}
+
+.head{padding:30px 0 6px}
+.head h1{font-size:26px;font-weight:670;letter-spacing:-0.028em;line-height:1.2}
+html[dir="rtl"] .head h1{letter-spacing:normal;line-height:1.42}
+.head>p{color:var(--dim);font-size:15px;margin-top:10px;max-width:66ch}
+.src{margin-top:14px;background:linear-gradient(168deg,var(--panel2),var(--panel));
+     border:1px solid var(--rule);border-radius:11px;padding:13px 15px;box-shadow:var(--lift);
+     font-size:13px;color:var(--dim)}
+.src b{color:var(--ink);font-weight:640}
+.src a{color:var(--az);text-decoration:none}
+.src a:hover{text-decoration:underline}
+
+.tabs{display:flex;gap:5px;margin:20px 0 4px;flex-wrap:wrap;border-bottom:1px solid var(--rule);
+      padding-bottom:11px}
+.tab{background:transparent;border:1px solid transparent;color:var(--dim);padding:6px 13px;
+     border-radius:8px;cursor:pointer;font-size:13.5px;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--panel2)}
+.tab.on{background:var(--az);border-color:var(--az);color:#03121f;font-weight:650}
+
+.dom{background:linear-gradient(168deg,var(--panel2),var(--panel));border:1px solid var(--rule);
+     border-radius:12px;padding:16px 17px;margin-bottom:11px;box-shadow:var(--lift)}
+.dom-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dom-h b{font-size:16px;font-weight:660}
+.wt{font-family:var(--mono);font-size:12px;color:var(--az);border:1px solid #1c4a75;
+    background:#08202f;padding:2px 9px;border-radius:99px;margin-inline-start:auto}
+.dom>p{color:var(--dim);font-size:13.4px;margin-top:6px;max-width:76ch}
+html[dir="rtl"] .dom>p{line-height:1.8;font-size:14px}
+.topic{border-top:1px solid var(--rule);margin-top:14px;padding-top:13px}
+.topic b{display:block;font-size:14px;font-weight:645}
+.topic ul{list-style:none;margin-top:7px}
+.topic li{position:relative;padding-inline-start:16px;color:var(--dim);font-size:13.2px;
+          line-height:1.55;margin-bottom:4px}
+html[dir="rtl"] .topic li{line-height:1.78;font-size:13.9px}
+.topic li::before{content:"";position:absolute;inset-inline-start:3px;top:9px;width:4px;height:4px;
+                  border-radius:99px;background:var(--rule-hi)}
+.trap{margin-top:9px;background:#241a0a;border:1px solid #5c4415;border-radius:8px;
+      padding:9px 11px;font-size:12.7px;color:#e3b96a}
+html[dir="rtl"] .trap{font-size:13.4px;line-height:1.75}
+.trap i{font-style:normal;font-weight:670;color:var(--new)}
+.links{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
+.links a{font-family:var(--mono);font-size:10.5px;color:var(--az);text-decoration:none;
+         border:1px solid #1c4a75;padding:2px 8px;border-radius:5px;overflow-wrap:anywhere}
+.links a:hover{background:#08202f}
+
+.newlist{display:grid;gap:8px}
+.newitem{background:linear-gradient(168deg,var(--panel2),var(--panel));
+         border:1px solid #5c4415;border-radius:11px;padding:13px 15px;box-shadow:var(--lift)}
+.newitem b{font-size:14px;font-weight:650;color:var(--new)}
+.newitem u{text-decoration:none;font-family:var(--mono);font-size:11px;color:var(--faint);
+           margin-inline-start:8px}
+.newitem p{color:var(--dim);font-size:13.2px;margin-top:5px;line-height:1.55}
+html[dir="rtl"] .newitem p{line-height:1.78;font-size:13.9px}
+
+.day{background:linear-gradient(168deg,var(--panel2),var(--panel));border:1px solid var(--rule);
+     border-radius:12px;padding:15px 16px;margin-bottom:11px;box-shadow:var(--lift)}
+.day-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding-bottom:10px;
+       border-bottom:1px solid var(--rule)}
+.day-h b{font-size:15.5px;font-weight:660}
+.day-h s{text-decoration:none;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+         margin-inline-start:auto}
+.slot{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:11px 0;
+      border-bottom:1px solid var(--rule)}
+.slot:last-child{border-bottom:0}
+.slot i{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--az);padding-top:2px}
+.slot b{display:block;font-size:14px;font-weight:640}
+.slot p{color:var(--dim);font-size:12.9px;line-height:1.53;margin-top:3px}
+html[dir="rtl"] .slot p{line-height:1.76;font-size:13.6px}
+.slot em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--faint);
+         margin-inline-start:7px}
+
+footer{border-top:1px solid var(--rule);margin-top:34px;padding:20px 0 40px;
+       color:var(--faint);font-size:12.5px}
+.fi{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.fi a{color:var(--dim);text-decoration:none}
+.fi a:hover{color:var(--az)}
+
+@media(max-width:680px){
+  .w{padding:0 15px}
+  .head h1{font-size:21px}
+  .slot{grid-template-columns:1fr;gap:4px}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;margin:16px -15px 0;padding:0 15px 11px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none}
+  .wt{margin-inline-start:0}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="w"><div class="top-in">
+  <div class="sig">SC</div>
+  <div class="nm"><b id="nm"></b><span id="tg"></span></div>
+  <button class="lang" id="lang" onclick="toggle()"></button>
+</div></div></header>
+
+<div class="w">
+  <div class="head">
+    <h1 id="h1"></h1>
+    <p id="lede"></p>
+    <div class="src" id="src"></div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div id="out"></div>
+</div>
+
+<footer><div class="w"><div class="fi">
+  <span id="f1"></span>
+  <span><a href="https://github.com/SiteQ8/SC-100" id="f2"></a></span>
+</div></div></footer>
+
+<script>
+const C = /*__COURSE__*/null;
+
+const T = {
+ en:{nm:"SC-100",tg:"Microsoft Cybersecurity Architect",btn:"العربية",
+  h1:"Course companion, built from the current exam blueprint.",
+  lede:"Everything here maps to the official skills measured. Each objective carries the mistake students most often make on it, and every reference link is fetched on each build so nothing points at a page Microsoft has moved.",
+  tabs:["Objectives","New in 2026","Agenda"],
+  srcT:"Skills measured as of",srcC:"blueprint checked",srcP:"Pass mark",
+  srcL:"Official study guide",
+  termNote:"",
+  srcNote:"Several widely read study sites still describe a domain called Design a Zero Trust strategy and architecture at 30 to 35 percent. That domain no longer exists. Zero Trust is now taught inside the first domain as a lens.",
+  trap:"Where students go wrong",
+  newNote:"These entered or grew in the 2026 revisions. A course written from older material will be silently out of date on exactly these points.",
+  f1:"Reference links verified on every build.",f2:"github.com/SiteQ8/SC-100",
+  day:"Day",read:"reading"},
+ ar:{nm:"إس سي ١٠٠",tg:"مهندس الأمن السيبراني من مايكروسوفت",btn:"English",
+  h1:"رفيق المقرر، مبني على مخطط الاختبار الحالي.",
+  lede:"كل ما هنا مربوط بالمهارات المقاسة الرسمية، ويحمل كل هدف الخطأ الذي يقع فيه الطلبة عليه غالبا، ويُجلب كل رابط مرجعي في كل بناء فلا يشير شيء إلى صفحة نقلتها مايكروسوفت.",
+  tabs:["الأهداف","الجديد في ٢٠٢٦","الجدول"],
+  srcT:"المهارات المقاسة اعتبارا من",srcC:"فُحص المخطط في",srcP:"درجة النجاح",
+  srcL:"دليل الدراسة الرسمي",
+  termNote:"تبقى نقاط التدريس بالإنجليزية عن قصد، لأن الاختبار وأسماء المنتجات بالإنجليزية، وترجمة مصطلح مثل الوصول المشروط تضر الطالب في القاعة ولا تنفعه.",
+  srcNote:"ما زالت مواقع دراسة واسعة الانتشار تصف مجالا باسم تصميم استراتيجية الثقة الصفرية بوزن ثلاثين إلى خمسة وثلاثين بالمئة، وذلك المجال لم يعد موجودا، وتُدرَّس الثقة الصفرية الآن داخل المجال الأول عدسةً.",
+  trap:"موضع خطأ الطلبة",
+  newNote:"هذه دخلت أو اتسعت في تحديثات ٢٠٢٦، وأي مقرر مكتوب من مواد أقدم سيكون متأخرا بصمت في هذه النقاط بالذات.",
+  f1:"تُتحقق الروابط المرجعية في كل بناء.",f2:"github.com/SiteQ8/SC-100",
+  day:"اليوم",read:"قراءة"}
+};
+
+let lang="en", tab=0;
+const t=()=>T[lang], L=()=>lang==="ar";
+const el=i=>document.getElementById(i);
+const esc=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function toggle(){
+  lang=lang==="en"?"ar":"en";
+  document.documentElement.lang=lang;
+  document.documentElement.dir=L()?"rtl":"ltr";
+  paint();
+}
+function setTab(i){tab=i;paint();}
+
+function paint(){
+  const s=t();
+  document.title=s.nm+" | "+s.tg;
+  el("nm").textContent=s.nm;el("tg").textContent=s.tg;el("lang").textContent=s.btn;
+  el("h1").textContent=s.h1;el("lede").textContent=s.lede;
+  el("f1").textContent=s.f1;el("f2").textContent=s.f2;
+
+  el("src").innerHTML='<b>'+s.srcT+' '+C.source.skills_measured_as_of+'</b> &middot; '+
+    s.srcC+' '+C.source.checked+' &middot; '+s.srcP+' '+C.source.pass_score+
+    ' &middot; <a href="'+C.source.url+'" target="_blank" rel="noopener">'+s.srcL+'</a>'+
+    '<div style="margin-top:8px;color:var(--new);font-size:12.5px">'+s.srcNote+'</div>';
+
+  el("tabs").innerHTML=s.tabs.map(function(x,i){
+    return '<button class="tab'+(tab===i?" on":"")+'" onclick="setTab('+i+')">'+x+'</button>';
+  }).join("");
+
+  el("out").innerHTML=(tab===0&&s.termNote
+      ? '<p style="color:var(--faint);font-size:12.8px;margin:2px 0 14px;max-width:78ch">'+
+        s.termNote+'</p>' : "")+[objectives,newIn,agenda][tab]();
+}
+
+function linksFor(tid){
+  const s=t();
+  const rs=C.resources.filter(function(r){return r.topic===tid;});
+  if(!rs.length)return "";
+  return '<div class="links">'+rs.map(function(r){
+    return '<a href="'+r.url+'" target="_blank" rel="noopener" dir="ltr">'+esc(r.title)+'</a>';
+  }).join("")+'</div>';
+}
+
+function objectives(){
+  const s=t();
+  return C.domains.map(function(d){
+    return '<div class="dom"><div class="dom-h"><b>'+(L()?d.titleAr:d.title)+
+      '</b><span class="wt" dir="ltr">'+d.weight+'</span></div><p>'+
+      (L()?d.framingAr:d.framing)+'</p>'+
+      d.topics.map(function(tp){
+        return '<div class="topic"><b>'+(L()?tp.titleAr:tp.title)+'</b><ul>'+
+          tp.teach.map(function(x){return '<li dir="ltr" style="text-align:start">'+
+            esc(x)+'</li>';}).join("")+
+          '</ul>'+'<div class="trap"><i>'+s.trap+':</i> '+
+            esc(L()?(tp.trapAr||tp.trap):tp.trap)+'</div>'+
+          linksFor(tp.id)+'</div>';
+      }).join("")+'</div>';
+  }).join("");
+}
+
+function newIn(){
+  const s=t();
+  return '<p style="color:var(--dim);font-size:13.5px;margin:4px 0 14px;max-width:76ch">'+
+    s.newNote+'</p><div class="newlist">'+C.new_in_2026.map(function(n){
+      return '<div class="newitem"><b>'+esc(n.label)+'</b><u dir="ltr">'+n.topic+
+        '</u><p>'+esc(n.why)+'</p></div>';
+    }).join("")+'</div>';
+}
+
+function agenda(){
+  const s=t();
+  return C.agenda.map(function(d){
+    return '<div class="day"><div class="day-h"><b>'+s.day+' '+d.day+' &middot; '+
+      (L()?d.themeAr:d.theme)+'</b><s dir="ltr">'+d.date+'</s></div>'+
+      d.sessions.map(function(x,i){
+        const r=C.rhythm.filter(function(y){return y.label==="Session "+x.slot;})[0];
+        return '<div class="slot"><i dir="ltr">'+(r?r.from+" - "+r.to:"")+'</i><div><b>'+
+          (L()?x.titleAr:x.title)+
+          (x.topics.length?'<em dir="ltr">'+x.topics.join(" ")+'</em>':"")+
+          '</b><p>'+(L()?x.aimAr:x.aim)+'</p></div></div>';
+      }).join("")+'</div>';
+  }).join("");
+}
+
+paint();
+</script>
+</body>
+</html>

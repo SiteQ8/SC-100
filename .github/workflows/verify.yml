@@ -1,0 +1,33 @@
+name: Verify blueprint and links
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild and verify every reference link
+        run: python3 scripts/build.py
+
+      - name: Rebuild the companion page
+        run: python3 scripts/build_site.py
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "SiteQ8"
+          git config user.email "311682+SiteQ8@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "Refresh verified reference links."
+            git push
+          else
+            echo "Nothing changed."
+          fi
