@@ -24,6 +24,11 @@ from agenda import AGENDA, COURSE, RHYTHM  # noqa: E402
 from webcheck import check_all  # noqa: E402
 
 OUT = ROOT / "data" / "course.json"
+
+# Microsoft revised SC-100 twice in 2026, in July and again in October, so a
+# quarter is the longest the blueprint can go unverified before the build stops.
+STALE_WARN_DAYS = 45
+STALE_AFTER_DAYS = 90
 LINKS = ROOT / "data" / "links.txt"
 
 
@@ -40,9 +45,11 @@ def main():
 
     # Every flagged 2026 change must attach to a topic that exists, otherwise
     # the warning is about something the course does not actually teach.
-    for label, tid, _ in NEW_IN_2026:
+    for label, labelAr, tid, why, whyAr in NEW_IN_2026:
         if tid not in topics:
             faults.append(f"2026 change '{label}' points at unknown topic {tid}")
+        if not labelAr or not whyAr:
+            faults.append(f"2026 change '{label}' has no Arabic")
 
     # The agenda and the objective map must agree in both directions.
     taught = set()
@@ -97,6 +104,41 @@ def main():
         if strict or any("unknown" in f or "no session" in f for f in faults):
             sys.exit(1)
 
+    taught_in = {}
+    for day in AGENDA:
+        for s in day["sessions"]:
+            for tid in s["topics"]:
+                taught_in.setdefault(tid, []).append(
+                    {"day": day["day"], "slot": s["slot"], "date": day["date"]})
+    for d in DOMAINS:
+        for tp in d["topics"]:
+            tp["taught"] = taught_in.get(tp["id"], [])
+
+    # Which objectives changed in the 2026 revisions, so the badge can sit on the
+    # objective rather than in a tab of its own.
+    changed = {}
+    for label, labelAr, tid, why, whyAr in NEW_IN_2026:
+        changed.setdefault(tid, []).append(
+            {"label": label, "labelAr": labelAr, "why": why, "whyAr": whyAr})
+    for d in DOMAINS:
+        for tp in d["topics"]:
+            tp["changed"] = changed.get(tp["id"], [])
+
+    # This repository's whole claim is that it tracks the current blueprint.
+    # Nothing enforced that, and it sat seven weeks stale with a product name
+    # Microsoft had since renamed. The check is now part of the build.
+    stale = (date.today() - date.fromisoformat(SOURCE["checked"])).days
+    if stale > STALE_AFTER_DAYS:
+        print(f"\nBlueprint last verified {stale} days ago against the study guide at",
+              file=sys.stderr)
+        print(f"  {SOURCE['url']}", file=sys.stderr)
+        print("Re-read it, update skills_measured_as_of and checked in data/objectives.py,",
+              file=sys.stderr)
+        print("then rebuild. Microsoft revises these without notice.", file=sys.stderr)
+        sys.exit(1)
+    if stale > STALE_WARN_DAYS:
+        print(f"  blueprint verified {stale} days ago, re-check soon")
+
     days_out = (date.fromisoformat(COURSE["starts"]) - date.today()).days
     course = {
         "course": COURSE,
@@ -105,7 +147,8 @@ def main():
         "days_until_delivery": days_out,
         "rhythm": [{"from": a, "to": b, "label": c} for a, b, c in RHYTHM],
         "domains": DOMAINS,
-        "new_in_2026": [{"label": l, "topic": t, "why": w} for l, t, w in NEW_IN_2026],
+        "new_in_2026": [{"label": l, "labelAr": la, "topic": t, "why": w, "whyAr": wa}
+                        for l, la, t, w, wa in NEW_IN_2026],
         "agenda": AGENDA,
         "resources": resources,
         "counts": {
