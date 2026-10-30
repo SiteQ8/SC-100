@@ -9,8 +9,8 @@ Course material for the delivery beginning 14 September 2026.
 
 ## What this is
 
-Teaching material built from the skills measured **as of 28 July 2026**, checked
-against the official study guide on 8 September 2026. Four domains, 14 topics,
+Teaching material built from the skills measured **as of 21 October 2026**, checked
+against the official study guide on 30 October 2026. Four domains, 14 topics,
 16 timed sessions across four days, and 48 reference links that are fetched on
 every build.
 
@@ -41,6 +41,21 @@ secure AI adoption as a named strategy objective, AI workload data security,
 Copilot data controls, Security Exposure Management, and the rewrite of the
 network objective around Security Service Edge.
 
+## What the October 2026 revision changed
+
+Microsoft revised the blueprint on 21 October, the second revision of the year.
+The weightings and the four domains did not move. Two things in the wording did,
+and both matter in a classroom:
+
+**Copilot for Microsoft 365 is now Microsoft 365 Copilot.** The objective was
+renamed, so the older name now dates whoever says it out loud.
+
+**SOAR is spelled out as security orchestration, automation and response.** The
+previous wording said automated response.
+
+Neither is hard to teach. Both are easy to get wrong from material written
+before October.
+
 ## What is checked on every build
 
 **Links.** Microsoft Learn reorganises constantly and a deck full of dead URLs
@@ -56,7 +71,13 @@ blueprint.
 to go after the session, so that is a fault too.
 
 **Both languages.** Every topic carries its guidance in English and Arabic, and
-the build fails if one is missing.
+every 2026 change note does too. The build fails if one is missing.
+
+**Blueprint freshness.** The build warns after 45 days and refuses to run after
+90 days since the blueprint was last verified against the study guide. This
+exists because the repository went seven weeks without a check and carried a
+renamed product the whole time. A claim about being current has to be enforced
+or it is just a claim.
 
 ## A deliberate choice about language
 
@@ -75,6 +96,18 @@ python3 scripts/build_site.py   rebuild the companion page
 Use `--strict` on the first to fail on any unusable link. A daily workflow runs
 both, so a link that dies between now and delivery is caught rather than found
 live.
+
+## The companion page
+
+One page, no external requests, works offline. Objectives are collapsed by
+default and each one shows which day and session teaches it, so a student can
+scan fourteen objectives rather than scroll five thousand pixels of open prose.
+
+Search runs across titles, teaching points, traps and change notes in both
+languages, and opens whatever it matches. The 2026 changes sit inline on the
+objectives they affect rather than in a tab of their own, with a filter to show
+only those. Ticking an objective as covered is kept in the browser for that one
+reader, and the page works the same when storage is unavailable.
 
 ## Structure
 

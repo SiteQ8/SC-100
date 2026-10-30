@@ -11,6 +11,8 @@ tpl = (ROOT / "src" / "index.template.html").read_text(encoding="utf-8")
 # page is a shell of the English one.
 faults = [t["id"] for d in course["domains"] for t in d["topics"]
           if not t.get("trapAr") or not t.get("titleAr")]
+faults += [f'change {c["label"]}' for d in course["domains"] for t in d["topics"]
+           for c in t.get("changed", []) if not c.get("labelAr") or not c.get("whyAr")]
 if faults:
     print("topics missing Arabic:", *faults, sep="\n  ", file=sys.stderr)
     sys.exit(1)
