@@ -3,7 +3,6 @@
     "code": "SC-100",
     "title": "Microsoft Cybersecurity Architect",
     "titleAr": "مهندس الأمن السيبراني من مايكروسوفت",
-    "starts": "2026-09-14",
     "days": 4,
     "delivery": "Instructor led",
     "audience": "Security professionals holding SC-200, SC-300 or AZ-500 who design rather than configure.",
@@ -18,7 +17,15 @@
     "prerequisite": "An active SC-200, SC-300 or AZ-500 certification is required for the Expert credential."
   },
   "built": "2026-11-06",
-  "days_until_delivery": -53,
+  "cohorts": [
+    {
+      "label": "September 2026",
+      "labelAr": "سبتمبر ٢٠٢٦",
+      "from": "2026-09-14",
+      "to": "2026-09-17",
+      "revised": true
+    }
+  ],
   "rhythm": [
     {
       "from": "09:00",
@@ -80,8 +87,7 @@
           "taught": [
             {
               "day": 1,
-              "slot": 2,
-              "date": "2026-09-14"
+              "slot": 2
             }
           ],
           "changed": []
@@ -101,8 +107,7 @@
           "taught": [
             {
               "day": 1,
-              "slot": 3,
-              "date": "2026-09-14"
+              "slot": 3
             }
           ],
           "changed": [
@@ -129,8 +134,7 @@
           "taught": [
             {
               "day": 1,
-              "slot": 4,
-              "date": "2026-09-14"
+              "slot": 4
             }
           ],
           "changed": [
@@ -168,8 +172,7 @@
           "taught": [
             {
               "day": 2,
-              "slot": 1,
-              "date": "2026-09-15"
+              "slot": 1
             }
           ],
           "changed": [
@@ -205,8 +208,7 @@
           "taught": [
             {
               "day": 2,
-              "slot": 2,
-              "date": "2026-09-15"
+              "slot": 2
             }
           ],
           "changed": [
@@ -235,8 +237,7 @@
           "taught": [
             {
               "day": 2,
-              "slot": 3,
-              "date": "2026-09-15"
+              "slot": 3
             }
           ],
           "changed": []
@@ -256,8 +257,7 @@
           "taught": [
             {
               "day": 2,
-              "slot": 4,
-              "date": "2026-09-15"
+              "slot": 4
             }
           ],
           "changed": []
@@ -290,8 +290,7 @@
           "taught": [
             {
               "day": 3,
-              "slot": 1,
-              "date": "2026-09-16"
+              "slot": 1
             }
           ],
           "changed": [
@@ -320,8 +319,7 @@
           "taught": [
             {
               "day": 3,
-              "slot": 2,
-              "date": "2026-09-16"
+              "slot": 2
             }
           ],
           "changed": [
@@ -348,8 +346,7 @@
           "taught": [
             {
               "day": 3,
-              "slot": 3,
-              "date": "2026-09-16"
+              "slot": 3
             }
           ],
           "changed": [
@@ -376,8 +373,7 @@
           "taught": [
             {
               "day": 3,
-              "slot": 4,
-              "date": "2026-09-16"
+              "slot": 4
             }
           ],
           "changed": [
@@ -415,8 +411,7 @@
           "taught": [
             {
               "day": 4,
-              "slot": 1,
-              "date": "2026-09-17"
+              "slot": 1
             }
           ],
           "changed": [
@@ -447,8 +442,7 @@
           "taught": [
             {
               "day": 4,
-              "slot": 2,
-              "date": "2026-09-17"
+              "slot": 2
             }
           ],
           "changed": []
@@ -470,8 +464,7 @@
           "taught": [
             {
               "day": 4,
-              "slot": 3,
-              "date": "2026-09-17"
+              "slot": 3
             }
           ],
           "changed": [
@@ -568,7 +561,6 @@
   "agenda": [
     {
       "day": 1,
-      "date": "2026-09-14",
       "theme": "Framing, frameworks and priorities",
       "themeAr": "التأطير والأطر والأولويات",
       "sessions": [
@@ -614,7 +606,6 @@
     },
     {
       "day": 2,
-      "date": "2026-09-15",
       "theme": "Operations, identity and compliance",
       "themeAr": "العمليات والهوية والامتثال",
       "sessions": [
@@ -662,7 +653,6 @@
     },
     {
       "day": 3,
-      "date": "2026-09-16",
       "theme": "Infrastructure",
       "themeAr": "البنية التحتية",
       "sessions": [
@@ -710,7 +700,6 @@
     },
     {
       "day": 4,
-      "date": "2026-09-17",
       "theme": "Applications, data and exam strategy",
       "themeAr": "التطبيقات والبيانات واستراتيجية الاختبار",
       "sessions": [
@@ -1146,6 +1135,7 @@
     "topics": 14,
     "sessions": 16,
     "resources": 48,
-    "new_items": 11
+    "new_items": 11,
+    "cohorts": 1
   }
 }
