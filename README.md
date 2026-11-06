@@ -1,18 +1,25 @@
 # SC-100
 
 **Microsoft Cybersecurity Architect**
-Course material for the delivery beginning 14 September 2026.
+The study site for everyone who has sat this course, and for everyone who will.
 
-[Open the companion](https://siteq8.github.io/SC-100/) · [Official study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-100)
+[Open the site](https://siteq8.github.io/SC-100/) · [Official study guide](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/sc-100)
 
 ---
 
 ## What this is
 
-Teaching material built from the skills measured **as of 21 October 2026**, checked
-against the official study guide on 30 October 2026. Four domains, 14 topics,
-16 timed sessions across four days, and 48 reference links that are fetched on
-every build.
+Built from the skills measured **as of 21 October 2026**, checked against the
+official study guide on 30 October 2026. Four domains, 14 topics, 16 timed
+sessions across four days, and 48 reference links that are fetched on every
+build.
+
+It is not tied to one delivery. The agenda is the shape of the course, in day
+numbers, and the dates belong to the cohorts in `data/agenda.py`. A student from
+any session opens the same fourteen objectives, finds their own dates under
+Agenda, and is told when the blueprint has moved since the room they sat in.
+Adding a session is one entry in `COHORTS`, and the build checks its dates span
+the four teaching days.
 
 ## Read this before using any other SC-100 material
 
@@ -64,8 +71,13 @@ has moved is followed and recorded at its new address.
 
 **Agenda coverage.** Every session names the objective ids it teaches, and the
 build fails if a session references an objective that does not exist, or if any
-objective has no session. The delivery plan cannot silently drift from the
+objective has no session. The teaching plan cannot silently drift from the
 blueprint.
+
+**Cohort dates.** Each session taught is real ISO dates, in order, spanning the
+four teaching days, or the build stops. A cohort that ended before the current
+blueprint date is marked on the site, because those students were taught against
+a map Microsoft has since revised and that is the first thing they need to know.
 
 **Reading coverage.** A topic with no verified reading leaves a student nowhere
 to go after the session, so that is a fault too.
@@ -97,17 +109,19 @@ Use `--strict` on the first to fail on any unusable link. A daily workflow runs
 both, so a link that dies between now and delivery is caught rather than found
 live.
 
-## The companion page
+## The site
 
 One page, no external requests, works offline. Objectives are collapsed by
 default and each one shows which day and session teaches it, so a student can
 scan fourteen objectives rather than scroll five thousand pixels of open prose.
 
-Search runs across titles, teaching points, traps and change notes in both
-languages, and opens whatever it matches. The 2026 changes sit inline on the
-objectives they affect rather than in a tab of their own, with a filter to show
-only those. Ticking an objective as covered is kept in the browser for that one
-reader, and the page works the same when storage is unavailable.
+A student arriving cold gets the path in four steps, and dismisses it for good
+once they know it. Search runs across titles, teaching points, traps and change
+notes in both languages, and opens whatever it matches. The 2026 changes sit
+inline on the objectives they affect rather than in a tab of their own, with a
+filter to show only those, which is where a returning student starts. Ticking an
+objective as covered is kept in the browser for that one reader, with a way to
+clear it, and the page works the same when storage is unavailable.
 
 ## Structure
 

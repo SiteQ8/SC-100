@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "data"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from objectives import DOMAINS, NEW_IN_2026, SOURCE  # noqa: E402
-from agenda import AGENDA, COURSE, RHYTHM  # noqa: E402
+from agenda import AGENDA, COHORTS, COURSE, RHYTHM  # noqa: E402
 from webcheck import check_all  # noqa: E402
 
 OUT = ROOT / "data" / "course.json"
@@ -50,6 +50,21 @@ def main():
             faults.append(f"2026 change '{label}' points at unknown topic {tid}")
         if not labelAr or not whyAr:
             faults.append(f"2026 change '{label}' has no Arabic")
+
+    # A cohort is a promise to a specific room, so its dates are checked rather
+    # than trusted: real ISO dates, in order, spanning the four teaching days.
+    for c in COHORTS:
+        try:
+            a, b = date.fromisoformat(c["from"]), date.fromisoformat(c["to"])
+        except (KeyError, ValueError):
+            faults.append(f"cohort '{c.get('label', '?')}' has unreadable dates")
+            continue
+        span = (b - a).days + 1
+        if span != COURSE["days"]:
+            faults.append(
+                f"cohort '{c['label']}' spans {span} days, course is {COURSE['days']}")
+        if not c.get("labelAr"):
+            faults.append(f"cohort '{c['label']}' has no Arabic label")
 
     # The agenda and the objective map must agree in both directions.
     taught = set()
@@ -109,7 +124,7 @@ def main():
         for s in day["sessions"]:
             for tid in s["topics"]:
                 taught_in.setdefault(tid, []).append(
-                    {"day": day["day"], "slot": s["slot"], "date": day["date"]})
+                    {"day": day["day"], "slot": s["slot"]})
     for d in DOMAINS:
         for tp in d["topics"]:
             tp["taught"] = taught_in.get(tp["id"], [])
@@ -139,12 +154,17 @@ def main():
     if stale > STALE_WARN_DAYS:
         print(f"  blueprint verified {stale} days ago, re-check soon")
 
-    days_out = (date.fromisoformat(COURSE["starts"]) - date.today()).days
+    # A student taught before the blueprint moved was taught against a map
+    # Microsoft has since revised, and that is the one thing they most need to
+    # know on arriving here, so the page is told which cohorts those were.
+    cohorts = [dict(c, revised=c["to"] < SOURCE["skills_measured_as_of"])
+               for c in COHORTS]
+
     course = {
         "course": COURSE,
         "source": SOURCE,
         "built": date.today().isoformat(),
-        "days_until_delivery": days_out,
+        "cohorts": cohorts,
         "rhythm": [{"from": a, "to": b, "label": c} for a, b, c in RHYTHM],
         "domains": DOMAINS,
         "new_in_2026": [{"label": l, "labelAr": la, "topic": t, "why": w, "whyAr": wa}
@@ -157,6 +177,7 @@ def main():
             "sessions": sum(len(d["sessions"]) for d in AGENDA),
             "resources": len(resources),
             "new_items": len(NEW_IN_2026),
+            "cohorts": len(cohorts),
         },
     }
     OUT.write_text(json.dumps(course, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
@@ -164,7 +185,9 @@ def main():
     print(f"\ncourse.json  {c['domains']} domains, {c['topics']} topics, "
           f"{c['sessions']} sessions, {c['resources']} verified links")
     print(f"  skills measured as of {SOURCE['skills_measured_as_of']}, checked {SOURCE['checked']}")
-    print(f"  delivery in {days_out} days")
+    stale_cohorts = [c["label"] for c in cohorts if c["revised"]]
+    print(f"  {len(cohorts)} cohort(s) taught" +
+          (f", blueprint revised since: {', '.join(stale_cohorts)}" if stale_cohorts else ""))
 
 
 if __name__ == "__main__":

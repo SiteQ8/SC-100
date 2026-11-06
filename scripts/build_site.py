@@ -13,6 +13,7 @@ faults = [t["id"] for d in course["domains"] for t in d["topics"]
           if not t.get("trapAr") or not t.get("titleAr")]
 faults += [f'change {c["label"]}' for d in course["domains"] for t in d["topics"]
            for c in t.get("changed", []) if not c.get("labelAr") or not c.get("whyAr")]
+faults += [f'cohort {c["label"]}' for c in course["cohorts"] if not c.get("labelAr")]
 if faults:
     print("topics missing Arabic:", *faults, sep="\n  ", file=sys.stderr)
     sys.exit(1)

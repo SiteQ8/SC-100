@@ -1,8 +1,13 @@
-"""Delivery plan for the 14 September 2026 block.
+"""The shape of the course, and the sessions where it has been taught.
 
 Time is allocated in proportion to exam weight rather than to how interesting a
 topic is to teach. The two heaviest domains each get a full day, the two lighter
 ones share the remaining time with the opening and the exam strategy session.
+
+The agenda carries day numbers, not calendar dates. A date belongs to a cohort,
+not to the course, so a student who attended in September and a student who
+attends next year read the same four days and find their own dates in COHORTS.
+Add a session here when it is taught and the site serves that room too.
 
 Each session names the topic ids it covers so the agenda and the objective map
 cannot drift apart. The build fails if a session references a topic that does
@@ -13,12 +18,23 @@ COURSE = {
     "code": "SC-100",
     "title": "Microsoft Cybersecurity Architect",
     "titleAr": "مهندس الأمن السيبراني من مايكروسوفت",
-    "starts": "2026-09-14",
     "days": 4,
     "delivery": "Instructor led",
     "audience": "Security professionals holding SC-200, SC-300 or AZ-500 who design rather than configure.",
     "audienceAr": "مختصو الأمن الحاصلون على إحدى الشهادات المؤهلة ممن يصممون لا يعدّون.",
 }
+
+# Every session taught, oldest first. The build checks each span covers the four
+# teaching days, and marks a cohort whose room left before the blueprint moved,
+# because those students were taught against a map Microsoft has since revised.
+COHORTS = [
+    {
+        "label": "September 2026",
+        "labelAr": "سبتمبر ٢٠٢٦",
+        "from": "2026-09-14",
+        "to": "2026-09-17",
+    },
+]
 
 # Recurring shape of a teaching day, so students and the room know the rhythm.
 RHYTHM = [
@@ -34,7 +50,6 @@ RHYTHM = [
 AGENDA = [
     {
         "day": 1,
-        "date": "2026-09-14",
         "theme": "Framing, frameworks and priorities",
         "themeAr": "التأطير والأطر والأولويات",
         "sessions": [
@@ -58,7 +73,6 @@ AGENDA = [
     },
     {
         "day": 2,
-        "date": "2026-09-15",
         "theme": "Operations, identity and compliance",
         "themeAr": "العمليات والهوية والامتثال",
         "sessions": [
@@ -82,7 +96,6 @@ AGENDA = [
     },
     {
         "day": 3,
-        "date": "2026-09-16",
         "theme": "Infrastructure",
         "themeAr": "البنية التحتية",
         "sessions": [
@@ -106,7 +119,6 @@ AGENDA = [
     },
     {
         "day": 4,
-        "date": "2026-09-17",
         "theme": "Applications, data and exam strategy",
         "themeAr": "التطبيقات والبيانات واستراتيجية الاختبار",
         "sessions": [
